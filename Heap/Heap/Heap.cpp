@@ -8,25 +8,42 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <queue>
+#include <set>
 
 using namespace std;
-/*
-6
-1 6
-1 7
-1 8
-3
-2 8
-3
+/* better heap
+priority_queue<int,vector<int>,greater<int>> pq;
+	int q;
+	unordered_set<int> s;
+	cin>>q;
+	for(int i=0;i<q;i++){
+		int x,y;
+		cin >> x;
+		if(x==1){
+			cin >> y;
+			pq.push(y);
+		}
+		if(x==2){
+			cin >> y;
+			s.insert(y);
+		}
+		if(x==3){
+			while(s.find(pq.top())!=s.end()){
+				pq.pop();
+			}
+			cout << pq.top() << endl;
+		}
+	}
 */
 
 int main()
 {
-	int input;	
-	vector<int> numbers;
+	long input;	
+	vector<long> numbers;
 	make_heap(numbers.begin(), numbers.end());
 
-	int turns;
+	long turns;
 	cin >> turns;
 	for (int i = 0; i < turns; i++)
 	{
@@ -46,17 +63,9 @@ int main()
 		}
 		else if (input == 3)
 		{
-			sort_heap(numbers.begin(), (numbers.begin() + (numbers.size())));
-			cout << numbers.front() << endl;
+			cout << *min_element(begin(numbers), end(numbers)) << endl;
 		}
 	}
 	
-	/*
-	string line;
-	getline(std::cin, line);
-	istringstream stream(line);
-	while (stream >> input)
-		numbers.push_back(input);
-	*/
 	return 0;
 }
